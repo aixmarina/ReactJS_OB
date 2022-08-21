@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 
+const Persona = {
+    nombre: 'Martín',
+    edad: 0,
+    fecha: new Date(),
+    apellidos: 'San José'
+}
+
 export default function Clock() {
 
-    const Persona = {
-        nombre: 'Martín',
-        edad: 0,
-        fecha: new Date(),
-        apellidos: 'San José'
-    }
-
     const [clockState, setClockState] = useState(Persona);
+    console.log(" linea 13", clockState)
 
     useEffect(() => {
         const timerID = setInterval(() => tick(), 1000)
@@ -19,13 +20,15 @@ export default function Clock() {
     }, []);
 
     function tick() {
-        setClockState((clockState) => ({
-            ...clockState,
-            fecha: new Date(),
-            edad: clockState.edad + 1
-        }))
+        setClockState((prevState) => {
+            console.log("esto es el prevState", prevState)
+            return ({
+                ...prevState,
+                fecha: new Date(),
+                edad: prevState.edad + 1
+            })
+        })
     }
-
 
     return (
         <div>
